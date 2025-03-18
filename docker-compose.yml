@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  s_mysql:
+    image: mysql:latest
+    container_name: c_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql_network
+    healthcheck:  # ✅ MySQL servisi hazır olana kadar beklemesi için ekledik!
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpassword"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+
+  s_flask:
+    build: .
+    container_name: c_flask
+    restart: always
+    depends_on:
+      s_mysql:
+        condition: service_healthy  # ✅ Artık MySQL tamamen başlayana kadar bekleyecek
+    env_file:
+      - .env
+    ports:
+      - "3030:5000"
+    networks:
+      - mysql_network
+
+networks:
+  mysql_network:
