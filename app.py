@@ -3,6 +3,7 @@ from flask import Flask, jsonify
 import mysql.connector
 import os
 from dotenv import load_dotenv
+import requests
 
 # .env dosyasını yükle
 load_dotenv()
@@ -52,6 +53,13 @@ def kisiler():
     """ API endpoint - kisiler tablosundaki verileri döndürür """
     return jsonify(get_kisiler())
 
+@app.route('/cevap')
+def get_other_app_response():
+    try:
+        response = requests.get('http://c_flask2:5001')
+        return "Cevap: " + response.text
+    except requests.RequestException as e:
+        return jsonify({"error": str(e)})
 
 @app.route('/')
 def hello():
