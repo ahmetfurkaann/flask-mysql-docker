@@ -17,7 +17,6 @@ DB_CONFIG = {
     "database": os.getenv("DB_NAME")
 }
 
-print(DB_CONFIG)
 
 def get_mysql_connection():
     """ MySQL bağlantısını belirli bir süre boyunca dene """
@@ -53,9 +52,6 @@ def kisiler():
     """ API endpoint - kisiler tablosundaki verileri döndürür """
     return jsonify(get_kisiler())
 
-@app.route('/test')
-def test():
-    return "hello test"
 
 @app.route('/')
 def hello():
