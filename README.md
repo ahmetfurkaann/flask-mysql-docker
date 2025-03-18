@@ -40,8 +40,13 @@ Bu uygulama, MySQL veritabanına bağlanan ve verileri API üzerinden sunan iki 
 
 5. Eğer hata alırsanız, önce eski container’ları temizleyip yeniden başlatabilirsiniz:
    ```bash
-   docker-compose down
+   docker-compose down --volumes --remove-orphans
+   docker system prune -a -f
+   docker build -t flask_app .
+   docker build -t flask_app2 -f Dockerfile2 .
    docker-compose up --build
+   ------ EĞER HATA DEVAM EDERSE AŞAĞIDAKİ KOMUTU DENEYEREK DETAYLI LOGLARI İNCELE ------
+   docker-compose up --build --force-recreate --remove-orphans
    ```
 
 Uygulamalar varsayılan olarak aşağıdaki adreslerde çalışacaktır:
