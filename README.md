@@ -54,10 +54,3 @@ Uygulamalar varsayılan olarak aşağıdaki adreslerde çalışacaktır:
 - **Ana Flask Uygulaması (`s_flask`)**: [http://localhost:3030](http://localhost:3030)
 - **İkinci Flask Uygulaması (`s_flask2`)**: [http://localhost:3031](http://localhost:3031)
 
-## Veritabanı Bilgileri
-
-- **Host:** c_mysql
-- **Port:** 3306
-- **Kullanıcı:** root
-- **Şifre:** rootpassword
-- **Veritabanı:** deneme
